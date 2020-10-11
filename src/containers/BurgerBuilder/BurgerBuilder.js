@@ -92,29 +92,7 @@ class BurgerBuilder extends Component {
 
   purchaseContinueHandler = () => {
     // alert('You continue!');
-    //dummy price not save to calculate the price this way and not on server
-    // this.setState({ loading: true });
-    // const order = {
-    //   ingredient: this.state.ingredients,
-    //   price: this.state.totalPrice,
-    //   customer: {
-    //     name: 'John',
-    //     adress: { street: '44 street', zipCode: '39222', country: 'Australia' },
-    //     email: 'test@test.com',
-    //   },
-    //   deliveryMethod: 'foot',
-    // };
 
-    // axios
-    //   .post('/order.json', order)
-    //   .then((response) => {
-    //     console.log(response);
-    //     this.setState({ loading: false, purchasing: false });
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //     this.setState({ loading: false, purchasing: false });
-    //   });
     const queryParams = [];
     for (let i in this.state.ingredients) 
     {
@@ -122,8 +100,9 @@ class BurgerBuilder extends Component {
         encodeURIComponent(i) +
           '=' +
           encodeURIComponent(this.state.ingredients[i])
-      );}
-
+      );
+    }
+    queryParams.push('price='+ this.state.totalPrice)
     const queryString = queryParams.join('&')
 
     this.props.history.push({
