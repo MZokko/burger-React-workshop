@@ -49,11 +49,18 @@ class ContactData extends Component {
 
   orderHandler = (event) => {
     event.preventDefault();
-    // dummy price not save to calculate the price this way and not on server
+
     this.setState({ loading: true });
+
+    const formData={}
+    for(let formElementIdentifier in this.state.orderForm){
+      formData[formElementIdentifier]=this.state.orderForm[formElementIdentifier].value
+    }
+
     const order = {
       ingredient: this.props.ingredients,
       price: this.props.price,
+      orderData : formData
     };
 
     axios
@@ -89,7 +96,7 @@ class ContactData extends Component {
     }
 
     let form = (
-      <form>
+      <form onSubmit={this.orderHandler}>
         {formElementArray.map((formElement) => {
           return (
             <Input
