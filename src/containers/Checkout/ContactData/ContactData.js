@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
 import Button from '../../../components/UI/Button/Button';
 import classes from './ContactData.css';
 import axios from '../../../axios-orders';
@@ -90,7 +91,7 @@ class ContactData extends Component {
     }
 
     const order = {
-      ingredient: this.props.ingredients,
+      ingredient: this.props.ings,
       price: this.props.price,
       orderData: formData,
     };
@@ -204,4 +205,14 @@ class ContactData extends Component {
   }
 }
 
-export default ContactData;
+//redux
+const mapStateToProps=state=>{
+  return{
+  ings: state.ingredients,
+    price: state.totalPrice,
+  }
+}
+//nothing need to be send to redux from contact data
+// const mapDispatchToProps = (dispatch)=>{}
+
+export default connect(mapStateToProps)(ContactData);
