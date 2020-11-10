@@ -18,19 +18,12 @@ class BurgerBuilder extends Component {
   // }
   state = {
     purchasing: false,
-    loading: false,
-    error: false,
+    // loading: false,
+    // error: false,
   };
 
   componentDidMount() {
-    // axios
-    //   .get('https://burger-react-ae741.firebaseio.com/ingredients.json')
-    //   .then((response) => {
-    //     this.setState({ ingredients: response.data });
-    //   })
-    //   .catch((error) => {
-    //     this.setState({ error: true });
-    //   });
+   
   }
 
   updatePurchaseState(ingredients) {
@@ -143,9 +136,9 @@ class BurgerBuilder extends Component {
       );
     }
 
-    if (this.state.loading) {
-      orderSummary = <Spinner />;
-    }
+    // if (this.state.loading) {
+    //   orderSummary = <Spinner />;
+    // }
 
     return (
       <Aux>
