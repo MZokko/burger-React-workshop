@@ -1,4 +1,4 @@
-import actionTypes from './actionTypes'
+import * as actionTypes from './actionTypes'
 import axios from '../../axios-orders'
 
 export const purchaseBurgerSuccess = (id, orderData)=>{
@@ -16,8 +16,15 @@ export const purchaseBurgerFail = (error) =>{
     }
 }
 
-export const purchaseBurgerStart = (orderData)=>{
+export const purchaseBurgerStart = ()=>{
+    return {
+        type: actionTypes.PURCHASE_BURGER_START
+    }
+}
+
+export const purchaseBurger = (orderData)=>{
     return dispatch=>{
+        dispatch(purchaseBurgerStart())
         axios
       .post('/order.json', orderData)
       .then((response) => {
