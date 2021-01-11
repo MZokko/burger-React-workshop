@@ -50,6 +50,7 @@ const reducer = (state = initialState, action) => {
           return{
             ...state,
             error:true,
+            totalPrice:4,
           }
 
     default:
