@@ -8,6 +8,7 @@ import * as actionTypes from '../../store/actions/index'
 
 class Checkout extends Component {
 
+
   CheckoutCancelHandler = () => {
     this.props.history.goBack();
   };
@@ -47,9 +48,9 @@ const mapStateToProps = (state) => {
   return {
     ings: state.burgerBuilder.ingredients,
     purchased: state.order.purchased,
-    price: state.burgerBuilder.totalPrice,
   };
 };
+
 
 
 
