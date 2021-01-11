@@ -4,26 +4,12 @@ import { connect } from 'react-redux';
 
 import CheckoutSummary from '../../components/Order/CheckoutSummary/CheckoutSummary';
 import ContactData from './ContactData/ContactData';
+import * as actionTypes from '../../store/actions/index'
 
 class Checkout extends Component {
-  // state = {
-  //   ingredients: null, price:0,
-  // };
-
-  // componentWillMount() {
-  //   const query = new URLSearchParams(this.props.location.search);
-  //   const ingredients = {};
-  //   let price=0;
-  //   for (let param of query.entries()) {
-  //     //['salad,'1']
-  //     if(param[0]==='price'){
-  //       price = +param[1]
-  //     }else{
-  //       ingredients[param[0]] = +param[1];
-  //     }
-  //   }
-  //   this.setState({ ingredients: ingredients , totalPrice: price});
-  // }
+  componentDidMount() {
+    this.props.onInitPurchase()
+  }
 
   CheckoutCancelHandler = () => {
     this.props.history.goBack();
@@ -37,8 +23,10 @@ class Checkout extends Component {
     let summary = <Redirect to='/' />;
 
     if (this.props.ings) {
+      const purchasedRedirect = this.props.purchased ? <Redirect to='/'/> : null;
       summary = (
         <div>
+          {purchasedRedirect}
           <CheckoutSummary
             ingredients={this.props.ings}
             CheckoutCancel={this.CheckoutCancelHandler}
@@ -61,10 +49,11 @@ class Checkout extends Component {
 const mapStateToProps = (state) => {
   return {
     ings: state.burgerBuilder.ingredients,
+    purchased: state.order.purchased,
     price: state.burgerBuilder.totalPrice,
   };
 };
-//nothing need to be send to redux from checkout
-// const mapDispatchToProps = (dispatch)=>{}
+
+
 
 export default connect(mapStateToProps)(Checkout);

@@ -3,11 +3,17 @@ import * as actionTypes from '../actions/actionTypes';
 const initialState = {
   orders: [],
   loading: false,
+  purchased: false,
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.PURCHASE_BURGER_START://handle the loading with redux
+    case actionTypes.PURCHASE_INIT:
+      return {
+        ...state,
+        purchased: false,
+      };
+    case actionTypes.PURCHASE_BURGER_START: //handle the loading with redux
       return {
         ...state,
         loading: true,
@@ -22,6 +28,7 @@ const reducer = (state = initialState, action) => {
         //store the order in order array && set loading to false
         ...state,
         loading: false,
+        purchased: true,
         orders: state.orders.concat(newOrder), // concat return a new array <= inmutable
       };
 
