@@ -7,9 +7,6 @@ import ContactData from './ContactData/ContactData';
 import * as actionTypes from '../../store/actions/index'
 
 class Checkout extends Component {
-  componentDidMount() {
-    this.props.onInitPurchase()
-  }
 
   CheckoutCancelHandler = () => {
     this.props.history.goBack();
