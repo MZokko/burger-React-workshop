@@ -60,8 +60,8 @@ class Checkout extends Component {
 //redux
 const mapStateToProps = (state) => {
   return {
-    ings: state.ingredients,
-    price: state.totalPrice,
+    ings: state.burgerBuilder.ingredients,
+    price: state.burgerBuilder.totalPrice,
   };
 };
 //nothing need to be send to redux from checkout

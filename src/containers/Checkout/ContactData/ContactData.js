@@ -208,9 +208,9 @@ class ContactData extends Component {
 //redux
 const mapStateToProps = (state) => {
   return {
-    ings: state.ingredients,
-    price: state.totalPrice,
-    loading : state.loading
+    ings: state.burgerBuilder.ingredients,
+    price: state.burgerBuilder.totalPrice,
+    loading : state.order.loading
   };
 };
 //connect contact data container  and action
