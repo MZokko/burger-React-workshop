@@ -34,5 +34,5 @@ export const purchaseBurger = (orderData)=>{
       .catch((error) => {
           dispatch(purchaseBurgerFail(error))
       });
-    }
+    } 
 }
