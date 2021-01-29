@@ -5,6 +5,7 @@ import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
 import classes from './Auth.css';
 import * as actions from '../../store/actions/index';
+import {Redirect} from 'react-router-dom'
 
 export class Auth extends Component {
   state = {
@@ -121,8 +122,13 @@ export class Auth extends Component {
       errorMessage =(<p>{this.props.error.message}</p>)
     }
 
+    let authRedirect = null
+    if (this.props.isSignUp) {
+      authRedirect=<Redirect to='/' />
+    }
     return (
       <div className={classes.Auth}>
+        {authRedirect}
         {errorMessage}
         <form onSubmit={this.submitHandler}>
           {form}
@@ -130,7 +136,7 @@ export class Auth extends Component {
         </form>
         <Button 
         clicked={this.swithAuthModeHandler}
-        btnType='Danger'>Switch to {this.state.isSignUp ? 'SIGNIN' : 'SIGNUP'}</Button>
+        btnType='Danger'>Switch to {this.state.isSignUp ? 'Login' : 'create account'}</Button>
       </div>
     );
   }
@@ -139,6 +145,7 @@ const mapStateToProps = (state) => {
   return {
     loading: state.auth.loading,
     error: state.auth.error,
+    isSignUp : state.auth.token!==null
   }
 }
 
