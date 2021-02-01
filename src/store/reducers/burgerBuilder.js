@@ -4,6 +4,7 @@ const initialState = {
   ingredients: null,
   totalPrice: 4,
   error: false,
+  building: false,
 };
 
 const INGREDIENT_PRICES = {
@@ -25,6 +26,7 @@ const addIngredient = (state, action) => {
     ingredients: updatedIngredients,
     //Recalculate the price
     totalPrice: state.totalPrice + INGREDIENT_PRICES[action.ingredientName],
+    building: true,
   };
   return updateObject(state, updatedState);
 }
@@ -38,6 +40,7 @@ const removeIngredient=(state, action) =>{
     ingredients: updatedIngs,
     //Recalculate the price
     totalPrice: state.totalPrice + INGREDIENT_PRICES[action.ingredientName],
+    building: true,
   };
   return updateObject(state, updatedStRemove);
 }
@@ -47,6 +50,7 @@ const setIngredient = (state, action)=>{
     ingredients: action.ingredients,
     error: false,
     totalPrice: 4,
+    building: false,
   }))
 }
 const fetchIngredientsFailed=(state, action)=>{
