@@ -6,6 +6,7 @@ import Button from '../../components/UI/Button/Button';
 import classes from './Auth.css';
 import * as actions from '../../store/actions/index';
 import { Redirect } from 'react-router-dom';
+import { updateObject } from '../../shared/utility';
 
 export class Auth extends Component {
   state = {
@@ -65,18 +66,12 @@ export class Auth extends Component {
 
   inputChangedHandler = (event, controlName) => {
     //create updated form control update the elements
-    const updatedControls = {
-      ...this.state.controls,
-      [controlName]: {
-        ...this.state.controls[controlName],
+    const updatedControls = updateObject(this.state.controls, {
+      [controlName]: updateObject(this.state.controls[controlName],{
         value: event.target.value,
-        valid: this.checkValidity(
-          event.target.value,
-          this.state.controls[controlName].Validation
-        ),
+        valid: this.checkValidity(event.target.value,this.state.controls[controlName].Validation),
         touched: true,
-      },
-    };
+      })});
     this.setState({ controls: updatedControls });
   };
 
@@ -159,7 +154,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onAuth: (email, password, isSignUp) => dispatch(actions.auth(email, password, isSignUp)),
+    onAuth: (email, password, isSignUp) =>
+      dispatch(actions.auth(email, password, isSignUp)),
     onSetAuthRedirectPath: () => dispatch(actions.setAuthRedirectPath('/')),
   };
 };

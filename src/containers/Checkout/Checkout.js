@@ -6,6 +6,7 @@ import CheckoutSummary from '../../components/Order/CheckoutSummary/CheckoutSumm
 import ContactData from './ContactData/ContactData';
 // import * as actionTypes from '../../store/actions/index'
 
+
 class Checkout extends Component {
 
 
