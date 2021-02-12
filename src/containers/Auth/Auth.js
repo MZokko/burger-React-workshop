@@ -6,8 +6,7 @@ import Button from '../../components/UI/Button/Button';
 import classes from './Auth.css';
 import * as actions from '../../store/actions/index';
 import { Redirect } from 'react-router-dom';
-import { updateObject } from '../../shared/utility';
-
+import { updateObject , checkValidity} from '../../shared/utility';
 export class Auth extends Component {
   state = {
     controls: {
@@ -43,33 +42,12 @@ export class Auth extends Component {
     }
   }
 
-  checkValidity = (value, rules) => {
-    let isValid = true;
-    if (!rules) {
-      return true;
-    }
-
-    if (rules.required) {
-      isValid = value.trim() !== '' && isValid;
-    }
-
-    if (rules.minlength) {
-      isValid = value.length >= rules.minlength && isValid;
-    }
-
-    if (rules.maxlength) {
-      isValid = value.length <= rules.maxlength && isValid;
-    }
-
-    return isValid;
-  };
-
   inputChangedHandler = (event, controlName) => {
     //create updated form control update the elements
     const updatedControls = updateObject(this.state.controls, {
       [controlName]: updateObject(this.state.controls[controlName],{
         value: event.target.value,
-        valid: this.checkValidity(event.target.value,this.state.controls[controlName].Validation),
+        valid: checkValidity(event.target.value,this.state.controls[controlName].Validation),
         touched: true,
       })});
     this.setState({ controls: updatedControls });
