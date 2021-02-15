@@ -30,4 +30,10 @@ describe('<NavigationItems />',()=>{
         wrapper.setProps({isAuth: true}) // passing the prop thru the helper method from enzyme
         expect(wrapper.find(NavigationItem)).toHaveLength(3)
     })
+
+    //test if the logout is there specifically
+    it('should render logout navigationItem',()=>{
+        wrapper.setProps({isAuth: true})
+        expect(wrapper.contains(<NavigationItem link="/logout">Log Out</NavigationItem>)).toEqual(true)
+    })
 });
